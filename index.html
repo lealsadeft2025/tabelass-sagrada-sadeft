@@ -4,149 +4,195 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tabela Sagrada SADEFT LEAL</title>
-  <link rel="stylesheet" href="estilo.css" />
+
+  <!-- Fonte mística (Google Fonts exemplo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
   <style>
-    body.nocopy { user-select: none; }
-    .gate {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(to bottom, #0f172a, #1e293b);
+    body {
+      margin: 0;
+      font-family: 'Cinzel Decorative', cursive;
+      background: radial-gradient(circle at 30% 20%, #2e59d9 0%, #1e3a8a 40%, #0b122b 100%);
+      color: #fff;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-    .gate-card {
-      background: #111827;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
-    }
-    .gate-title {
-      font-size: 1.6rem;
-      color: #FFD700;
-      margin-bottom: 12px;
-    }
-    .gate-sub {
-      color: #e2e8f0;
-      margin-bottom: 18px;
-    }
-    .gate-input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 16px;
-      font-size: 1rem;
-    }
-    .gate-actions {
-      display: flex;
+      flex-direction: column;
       justify-content: space-between;
     }
-    .btn {
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
+
+    /* Versículo superior */
+    .versiculo-topo {
+      text-align: center;
+      padding: 12px;
+      font-size: 1rem;
+      color: #ffd700;
+      text-shadow: 0 2px 6px rgba(255,215,0,0.5);
+    }
+
+    /* Painel com borda dourada animada */
+    .painel {
+      position: relative;
+      margin: auto;
+      padding: 24px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 20px 60px rgba(20, 40, 120, 0.6);
+      width: 90%;
+      max-width: 800px;
+    }
+    .painel::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 18px;
+      padding: 3px;
+      background: conic-gradient(from 0deg, #ffd700, #f59e0b, #ffd700, #f59e0b, #ffd700);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      animation: halo 6s linear infinite;
+    }
+    @keyframes halo {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Título místico */
+    .titulo {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffd700;
+      text-shadow: 0 2px 12px rgba(255,215,0,0.6);
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 95%;
+      max-width: 500px;
+      height: 90px;
+      margin: 10px auto;
+      display: block;
+      border-radius: 12px;
       border: none;
+      padding: 12px;
+      font-size: 1rem;
+      color: #111;
+      background: #f8fafc;
     }
-    .btn-ouro {
-      background: #FFD700;
+
+    .btn-principal {
+      background: linear-gradient(135deg, #ffd700, #f59e0b);
       color: #111827;
+      font-weight: 800;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 22px;
+      margin: 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(245,158,11,0.5);
     }
-    .btn-escuro {
-      background: #1f2937;
-      color: #e2e8f0;
+
+    .botoes-animacao {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .gate-feedback {
-      margin-top: 10px;
-      color: #f87171;
-      min-height: 1em;
+    .btn-acao {
+      background: rgba(255,255,255,0.85);
+      color: #111;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+
+    /* Botão sair dentro do painel */
+    .btn-sair {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      background: linear-gradient(135deg, #ffd700, #f59e0b);
+      color: #111827;
+      font-weight: 900;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 20px;
+      box-shadow: 0 10px 28px rgba(245,158,11,0.55);
+      cursor: pointer;
+    }
+
+    /* Versículo inferior */
+    .versiculo-base {
+      text-align: center;
+      padding: 12px;
+      font-size: 1rem;
+      color: #ffd700;
+      text-shadow: 0 2px 6px rgba(255,215,0,0.5);
     }
   </style>
 </head>
-<body class="nocopy">
-  <!-- Tela de senha -->
-  <div class="gate" id="gate">
-    <div class="gate-card" id="gateCard">
-      <h2 class="gate-title">Proteção de acesso</h2>
-      <p class="gate-sub">Digite a senha para entrar no SADEFT LEAL.</p>
-      <input class="gate-input" id="senha" type="password" placeholder="Digite a senha" />
-      <div class="gate-actions">
-        <button class="btn btn-ouro" id="entrarBtn">Entrar</button>
-        <button class="btn btn-escuro" id="fecharBtn">Sair</button>
-      </div>
-      <div class="gate-feedback" id="gateFeedback"></div>
-    </div>
-  </div>
+<body>
+  <!-- Som ambiente suave -->
+  <audio id="somFundo" src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Scott_Holmes_Music_-_Corporate__Motivational/Scott_Holmes_Music_-_Inspiring_Cinematic_Background.mp3" autoplay loop></audio>
 
-  <!-- Painel principal -->
-  <div class="painel" id="conteudo" aria-hidden="true">
-    <h1 class="titulo">Painel de Comando SADEFT LEAL</h1>
+  <!-- Som de moeda suave ao digitar -->
+  <audio id="somTecla" src="https://www.soundjay.com/button/sounds/button-4.mp3" preload="auto"></audio>
+
+  <div class="versiculo-topo">Orarás a Ele e Ele te ouvirá – Jó 22:23</div>
+
+  <div class="painel">
+    <h1 class="titulo">Tabela Sagrada SADEFT LEAL</h1>
+
     <textarea id="entrada" placeholder="Digite o concurso anterior (15 dezenas)"></textarea>
     <textarea id="historico" placeholder="Digite a janela histórica (um concurso por linha)"></textarea>
-    <button onclick="gerar()">GERAR JOGOS</button>
-    <pre id="resultado">Aguardando geração...</pre>
+
+    <div style="text-align:center;">
+      <button class="btn-principal" id="btnGerar">GERAR JOGOS</button>
+    </div>
+
+    <div id="resultado" style="text-align:center; margin-top:8px;">Aguardando geração...</div>
+
     <div class="botoes-animacao">
-      <button onclick="aviao()">✈️ Jato Branco</button>
-      <button onclick="carro()">🏎️ Mercedes AMG</button>
-      <button onclick="heli()">🚁 Helicóptero de Ouro</button>
+      <button class="btn-acao" onclick="aviao()">✈️ Jato Branco</button>
+      <button class="btn-acao" onclick="carro()">🏎️ Mercedes Benz AMG</button>
+      <button class="btn-acao" onclick="heli()">🚁 Helicóptero de Ouro</button>
     </div>
-    <canvas id="canvasAnim"></canvas>
-    <div class="versiculo-base">
-      “Conhecereis a verdade, e a verdade vos libertará” – João 8:32
-    </div>
+
+    <!-- Botão sair dentro do painel -->
+    <button class="btn-sair" id="btnSair">Sair</button>
   </div>
 
-  <script src="script.js"></script>
+  <div class="versiculo-base">“Conhecereis a verdade, e a verdade vos libertará” – João 8:32</div>
+
   <script>
-    (function() {
-      const gate = document.getElementById('gate');
-      const gateCard = document.getElementById('gateCard');
-      const feedback = document.getElementById('gateFeedback');
-      const inputSenha = document.getElementById('senha');
-      const entrarBtn = document.getElementById('entrarBtn');
-      const fecharBtn = document.getElementById('fecharBtn');
-      const conteudo = document.getElementById('conteudo');
+    // Som ambiente suave (ativado após interação se bloqueado)
+    const somFundo = document.getElementById('somFundo');
+    document.addEventListener('click', () => { somFundo.play(); }, {once:true});
 
-      conteudo.setAttribute('aria-hidden', 'true');
+    // Som de moeda suave ao digitar
+    const somTecla = document.getElementById('somTecla');
+    document.addEventListener('keydown', () => {
+      somTecla.currentTime = 0;
+      somTecla.play();
+    });
 
-      document.addEventListener('contextmenu', (e) => e.preventDefault());
-      document.addEventListener('keydown', (e) => {
-        const bloqueios = (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U') || (e.key === 'F12');
-        if (bloqueios) e.preventDefault();
-      });
+    // Botão GERAR
+    document.getElementById('btnGerar').addEventListener('click', () => {
+      document.getElementById('resultado').textContent = 'Jogos gerados!';
+    });
 
-      entrarBtn.addEventListener('click', () => {
-        const senha = inputSenha.value.trim();
-        if (senha === 'Leal2461@') {
-          gate.style.display = 'none';
-          conteudo.removeAttribute('aria-hidden');
-          document.body.classList.remove('nocopy');
-          feedback.textContent = '';
-        } else {
-          feedback.textContent = 'Senha incorreta. Tente novamente.';
-          gateCard.classList.remove('shake');
-          void gateCard.offsetWidth;
-          gateCard.classList.add('shake');
-          inputSenha.focus();
-        }
-      });
+    // Botão SAIR
+    document.getElementById('btnSair').addEventListener('click', () => {
+      window.location.href = 'about:blank';
+    });
 
-      fecharBtn.addEventListener('click', () => {
-        feedback.textContent = 'Sessão encerrada.';
-        setTimeout(() => {
-          window.location.href = 'about:blank';
-        }, 400);
-      });
-
-      inputSenha.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') entrarBtn.click();
-      });
-    })();
+    // Funções de animação (exemplo)
+    function aviao(){ alert("Animação do Jato Branco!"); }
+    function carro(){ alert("Animação da Mercedes Benz AMG!"); }
+    function heli(){ alert("Animação do Helicóptero de Ouro!"); }
   </script>
 </body>
 </html>
