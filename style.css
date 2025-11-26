@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #87CEEB, #1e3c72);
+  color: white;
+  text-align: center;
+}
+
+.versiculo-topo, .versiculo-base {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.painel {
+  margin: 20px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 0 15px gold;
+}
+
+.titulo {
+  font-size: 26px;
+  font-weight: bold;
+  color: gold;
+  text-shadow: 0 0 10px #fff;
+}
+
+textarea {
+  width: 90%;
+  height: 90px;
+  margin-top: 15px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: gold;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background: #fff;
+}
+
+.botoes-animacao {
+  margin-top: 20px;
+}
+
+#canvasAnim {
+  width: 100%;
+  height: 200px;
+  display: block;
+  margin-top: 20px;
+}
