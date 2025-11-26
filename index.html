@@ -1,40 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tabela Sagrada SADEFT Leal</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tabela Sagrada SADEFT LEAL</title>
+  <link rel="stylesheet" href="estilo.css">
 </head>
-<body>
+<body class="nocopy">
+  <!-- Tela de proteção -->
+  <div class="gate" id="gate">
+    <div class="gate-card" id="gateCard">
+      <h2 class="gate-title">Proteção de acesso</h2>
+      <p class="gate-sub">Digite a senha para entrar no <strong>SADEFT LEAL</strong>.</p>
+      <label class="gate-label" for="senha">Senha</label>
+      <input class="gate-input" id="senha" type="password" placeholder="Digite a senha" />
+      <div class="gate-actions">
+        <button class="btn btn-ouro" id="entrarBtn">Entrar</button>
+        <button class="btn btn-escuro" id="fecharBtn">Sair</button>
+      </div>
+      <div class="gate-feedback" id="gateFeedback"></div>
+    </div>
+  </div>
 
-<div class="versiculo-topo">
-  Orarás a Ele e Ele te ouvirá — Jó 22:23
-</div>
+  <!-- Painel principal -->
+  <div class="painel" id="conteudo" aria-hidden="true">
+    <h1 class="titulo">Painel de Comando SADEFT LEAL</h1>
 
-<div class="painel">
-  <h1 class="titulo">Painel de Comando SADEFT LEAL</h1>
-  
-  <textarea id="entrada" placeholder="Digite o concurso anterior (15 dezenas)"></textarea>
-  <textarea id="historico" placeholder="Digite a janela histórica (um concurso por linha)"></textarea>
+    <textarea id="entrada" placeholder="Digite o concurso anterior (15 dezenas)"></textarea>
+    <textarea id="historico" placeholder="Digite a janela histórica (um concurso por linha)"></textarea>
 
-  <button onclick="gerar()">GERAR JOGOS</button>
+    <button onclick="gerar()">GERAR JOGOS</button>
+    <pre id="resultado">Aguardando geração...</pre>
 
-  <pre id="resultado"></pre>
-</div>
+    <div class="botoes-animacao">
+      <button onclick="aviao()">✈️ Jato Branco</button>
+      <button onclick="carro()">🏎️ Mercedes AMG</button>
+      <button onclick="heli()">🚁 Helicóptero de Ouro</button>
+    </div>
 
-<div class="versiculo-base">
-  "Conhecereis a verdade, e a verdade vos libertará" — João 8:32
-</div>
+    <canvas id="canvasAnim"></canvas>
 
-<div class="botoes-animacao">
-  <button onclick="aviao()">✈ Jato Branco</button>
-  <button onclick="carro()">🚗 Mercedes AMG</button>
-  <button onclick="heli()">🚁 Helicóptero de Ouro</button>
-</div>
+    <div class="versiculo-base">
+      "Conhecereis a verdade, e a verdade vos libertará" – João 8:32
+    </div>
+  </div>
 
-<canvas id="canvasAnim"></canvas>
-<script src="script.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function() {
+      const gate = document.getElementById('gate');
+      const gateCard = document.getElementById('gateCard');
+      const feedback = document.getElementById('gateFeedback');
+      const inputSenha = document.getElementById('senha');
+      const entrarBtn = document.getElementById('entrarBtn');
+      const fecharBtn = document.getElementById('fecharBtn');
+      const conteudo = document.getElementById('conteudo');
 
+      conteudo.setAttribute('aria-hidden', 'true');
+
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        const bloqueios = (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U') || (e.key === 'F12');
+        if (bloqueios) e.preventDefault();
+      });
+
+      entrarBtn.addEventListener('click', () => {
+        const senha = inputSenha.value.trim();
+        if (senha === 'Leal2461@') {
+          gate.style.display = 'none';
+          conteudo.removeAttribute('aria-hidden');
+          document.body.classList.remove('nocopy');
+          feedback.textContent = '';
+        } else {
+          feedback.textContent = 'Senha incorreta. Tente novamente.';
+          gateCard.classList.remove('shake');
+          void gateCard.offsetWidth;
+          gateCard.classList.add('shake');
+          inputSenha.focus();
+        }
+      });
+
+      fecharBtn.addEventListener('click', () => {
+        feedback.textContent = 'Sessão encerrada.';
+        setTimeout(() => {
+          window.location.href = 'about:blank';
+        }, 400);
+      });
+
+      inputSenha.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') entrarBtn.click();
+      });
+    })();
+  </script>
 </body>
 </html>
