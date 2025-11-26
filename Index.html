@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tabela Sagrada SADEFT LEAL</title>
+  <style>
+    :root {
+      --azul-celeste: #87CEEB;
+      --ouro: #DAA520;
+      --ouro-brilho: #FFD700;
+      --preto-veludo: #0f172a;
+      --branco: #ffffff;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: linear-gradient(180deg, var(--azul-celeste), #bfe8ff);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #0b1b2b;
+    }
+
+    /* Bloqueio inicial (proteção por senha) */
+    .gate {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(9, 20, 33, 0.88);
+      backdrop-filter: blur(2px);
+      z-index: 9999;
+    }
+    .gate-card {
+      width: min(420px, 92vw);
+      background: #0b1220;
+      border: 1px solid #1e293b;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .gate-title {
+      font-size: 1.4rem;
+      margin: 0 0 12px;
+      color: var(--ouro-brilho);
+      letter-spacing: 0.6px;
+      text-align: center;
+    }
+    .gate-sub {
+      margin: 0 0 18px;
+      color: #cbd5e1;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .gate-label {
+      display: block;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      margin-bottom: 6px;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      outline: none;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-size: 1rem;
+    }
+    .gate-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-ouro {
+      background: linear-gradient(90deg, var(--ouro), var(--ouro-brilho));
+      color: #111827;
+      box-shadow: 0 6px 16px rgba(218, 165, 32, 0.35);
+    }
+    .btn-escuro {
+      background: #111827;
+      color: #e5e7eb;
+      border: 1px solid #1f2937;
+    }
+    .gate-feedback {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #fca5a5;
+      min-height: 1.2em;
+    }
+    @keyframes shake {
+      10%, 90% { transform: translateX(-1px); }
+      20%, 80% { transform: translateX(2px); }
+      30%, 50%, 70% { transform: translateX(-4px); }
+      40%, 60% { transform: translateX(4px); }
+    }
+    .shake { animation: shake 0.4s ease-in-out; }
+
+    /* Conteúdo principal */
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero {
+      text-align: center;
+      margin: 28px 0 18px;
+    }
+    .titulo-ouro {
+      font-size: clamp(1.8rem, 3.8vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0;
+      color: transparent;
+      background: linear-gradient(180deg, var(--ouro-brilho), var(--ouro));
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 6px 20px rgba(255, 215, 0, 0.35);
+    }
+    .subtitulo {
+      margin-top: 6px;
+      color: #143b52;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(3px);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 12px 28px rgba(20, 60, 90, 0.15);
+    }
+    .card h3 {
+      margin: 0 0 12px;
+      color: #0b1b2b;
+      font-size: 1.1rem;
+    }
+
+    .campo {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .campo label {
+      font-weight: 700;
+      color: #143b52;
+    }
+    .campo input, .campo textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.15);
+      padding: 10px 12px;
+      outline: none;
+      font-size: 0.98rem;
+      color: #0b1b2b;
+      background: #ffffff;
+    }
+    .campo textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .acoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .btn-primario {
+      background: linear-gradient(90deg, var(--ouro-brilho), var(--ouro));
+      color: #1f2937;
+      font-weight: 800;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(218, 165, 32, 0.35);
+    }
+    .btn-secundario {
+      background: #0b1b2b;
+      color: #e6f3ff;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 12px;
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+
+    pre#resultado {
+      background: #0b1b2b;
+      color: #e6f3ff;
+      border-radius: 10px;
+      padding: 12px;
+      min-height: 120px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .anim-area {
+      display: grid;
+      gap: 10px;
+    }
+    .anim-area canvas {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: #eaf6ff;
+    }
+
+    .painel {
+      margin-top: 8px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #0b1b2b;
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(20,60,90,0.12);
+    }
+
+    /* Proteções simples adicionais */
+    body.nocopy ::selection { background: transparent; }
+    body.nocopy { -webkit-user-select: none; -ms-user-select: none; user-select: none; }
+  </style>
+</head>
+<body class="nocopy">
+  <!-- Gate de senha -->
+  <div class="gate" id="gate">
+    <div class="gate-card" id="gateCard">
+      <h2 class="gate-title">Proteção de acesso</h2>
+      <p class="gate-sub">Digite a senha para entrar no <strong>SADEFT LEAL</strong>.</p>
+      <label class="gate-label" for="senha">Senha</label>
+      <input class="gate-input" id="senha" type="password" placeholder="Digite a senha" />
+      <div class="gate-actions">
+        <button class="btn btn-ouro" id="entrarBtn">Entrar</button>
+        <button class="btn btn-escuro" id="fecharBtn">Sair</button>
+      </div>
+      <div class="gate-feedback" id="gateFeedback"></div>
+    </div>
+  </div>
+
+  <div class="wrap" aria-hidden="true" id="conteudo">
+    <header class="hero">
+      <h1 class="titulo-ouro">Tabela Sagrada SADEFT LEAL</h1>
+      <p class="subtitulo">Geração de jogos, animações e efeitos</p>
+    </header>
+
+    <main class="grid">
+      <!-- Lógica SADEFT LEAL / Geração de jogos -->
+      <section class="card">
+        <h3>Gerador SADEFT LEAL</h3>
+
+        <div class="campo">
+          <label for="entrada">Base de entrada (números separados por espaço)</label>
+          <input id="entrada" type="text" placeholder="Ex.: 1 5 9 12 18 22" />
+        </div>
+
+        <div class="campo">
+          <label for="historico">Histórico (um jogo por linha)</label>
+          <textarea id="historico" placeholder="Ex.: 1 3 5 7 9&#10;2 4 6 8 10"></textarea>
+        </div>
+
+        <div class="acoes">
+          <button class="btn-primario" onclick="gerar()">Gerar jogos</button>
+          <button class="btn-secundario" id="limparBtn">Limpar</button>
+        </div>
+
+        <div class="campo">
+          <label for="resultado">Resultado</label>
+          <pre id="resultado">Aguardando geração...</pre>
+        </div>
+      </section>
+
+      <!-- Animações e painel -->
+      <section class="card">
+        <h3>Animações</h3>
+        <div class="anim-area">
+          <canvas id="canvasAnim"></canvas>
+          <div class="acoes">
+            <button class="btn-secundario" id="btnAviao">Avião ✈</button>
+            <button class="btn-secundario" id="btnCarro">Carro 🚗</button>
+            <button class="btn-secundario" id="btnHeli">Helicóptero 🚁</button>
+          </div>
+        </div>
+
+        <div class="painel" aria-label="Painel de status">
+          <span class="badge">Painel ativo</span>
+          <span class="badge">Proteção habilitada</span>
+          <span class="badge" id="badgeAnim">Sem animação</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Importa seu script principal -->
+  <script src="./script.js"></script>
+
+  <!-- Script da proteção e integração dos botões -->
+  <script>
+    (function() {
+      const gate = document.getElementById('gate');
+      const gateCard = document.getElementById('gateCard');
+      const feedback = document.getElementById('gateFeedback');
+      const inputSenha = document.getElementById('senha');
+      const entrarBtn = document.getElementById('entrarBtn');
+      const fecharBtn = document.getElementById('fecharBtn');
+      const conteudo = document.getElementById('conteudo');
+      const badgeAnim = document.getElementById('badgeAnim');
+
+      // Oculta o conteúdo até liberar
+      conteudo.setAttribute('aria-hidden', 'true');
+
+      // Proteções simples: bloqueia contexto e atalhos de dev
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        const comboDev =
+          (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) ||
+          (e.ctrlKey && e.key.toUpperCase() === 'U') ||
+          (e.key === 'F12');
+        if (comboDev) e.preventDefault();
+      });
+
+      // Entrar
+      entrarBtn.addEventListener('click', () => {
+        const senha = inputSenha.value.trim();
+        if (senha === 'Leal2461@') {
+          gate.style.display = 'none';
+          conteudo.removeAttribute('aria-hidden');
+          document.body.classList.remove('nocopy');
+          feedback.textContent = '';
+        } else {
+          feedback.textContent = 'Senha incorreta. Tente novamente.';
+          gateCard.classList.remove('shake');
+          void gateCard.offsetWidth; // reset animação
+          gateCard.classList.add('shake');
+          inputSenha.focus();
+        }
+      });
+
+      // Sair (fecha a página)
+      fecharBtn.addEventListener('click', () => {
+        feedback.textContent = 'Sessão encerrada.';
+        setTimeout(() => {
+          // Redireciona para uma página em branco
+          window.location.href = 'about:blank';
+        }, 400);
+      });
+
+      // Enter para enviar
+      inputSenha.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') entrarBtn.click();
+      });
+
+      // Integração com botões de animação
+      const btnAviao = document.getElementById('btnAviao');
+      const btnCarro = document.getElementById('btnCarro');
+      const btnHeli = document.getElementById('btnHeli');
+
+      // Evita múltiplos setInterval simultâneos (limpeza)
+      let animTimer = null;
+      function resetAnim() {
+        if (animTimer) {
+          clearInterval(animTimer);
+          animTimer = null;
+        }
+      }
+
+      // Sobrepõe intervalos do script.js usando wrappers
+      btnAviao.addEventListener('click', () => {
+        resetAnim();
+        // Reinicia frame e animação ✈
+        window.frame = 0;
+        const canvas = document.getElementById('canvasAnim');
+        if (canvas && canvas.getContext) {
+          animTimer = setInterval(() => window.desenhar && window.desenhar('✈'), 60);
+          badgeAnim.textContent = 'Animação: Avião';
+        }
+      });
+
+      btnCarro.addEventListener('click', () => {
+        resetAnim();
+        window.frame = 0;
+        const canvas = document.getElementById('canvasAnim');
+        if (canvas && canvas.getContext) {
+          animTimer = setInterval(() => window.desenhar && window.desenhar('🚗'), 60);
+          badgeAnim.textContent = 'Animação: Carro';
+        }
+      });
+
+      btnHeli.addEventListener('click', () => {
+        resetAnim();
+        window.frame = 0;
+        const canvas = document.getElementById('canvasAnim');
+        if (canvas && canvas.getContext) {
+          animTimer = setInterval(() => window.desenhar && window.desenhar('🚁'), 60);
+          badgeAnim.textContent = 'Animação: Helicóptero';
+        }
+      });
+
+      // Botão limpar
+      const limparBtn = document.getElementById('limparBtn');
+      const entrada = document.getElementById('entrada');
+      const historico = document.getElementById('historico');
+      const resultado = document.getElementById('resultado');
+
+      limparBtn.addEventListener('click', () => {
+        entrada.value = '';
+        historico.value = '';
+        resultado.textContent = 'Aguardando geração...';
+        resetAnim();
+        badgeAnim.textContent = 'Sem animação';
+      });
+
+      // Ajusta canvas ao carregar (caso script.js ainda não tenha setado)
+      window.addEventListener('load', () => {
+        const canvas = document.getElementById('canvasAnim');
+        if (canvas) {
+          canvas.width = window.innerWidth;
+          canvas.height = 200;
+        }
+      });
+      window.addEventListener('resize', () => {
+        const canvas = document.getElementById('canvasAnim');
+        if (canvas) {
+          canvas.width = window.innerWidth;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
