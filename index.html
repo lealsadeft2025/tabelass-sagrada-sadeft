@@ -4,15 +4,76 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tabela Sagrada SADEFT LEAL</title>
-  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="estilo.css" />
+  <style>
+    body.nocopy { user-select: none; }
+    .gate {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, #0f172a, #1e293b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .gate-card {
+      background: #111827;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    .gate-title {
+      font-size: 1.6rem;
+      color: #FFD700;
+      margin-bottom: 12px;
+    }
+    .gate-sub {
+      color: #e2e8f0;
+      margin-bottom: 18px;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .gate-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-ouro {
+      background: #FFD700;
+      color: #111827;
+    }
+    .btn-escuro {
+      background: #1f2937;
+      color: #e2e8f0;
+    }
+    .gate-feedback {
+      margin-top: 10px;
+      color: #f87171;
+      min-height: 1em;
+    }
+  </style>
 </head>
 <body class="nocopy">
-  <!-- Tela de proteção -->
+  <!-- Tela de senha -->
   <div class="gate" id="gate">
     <div class="gate-card" id="gateCard">
       <h2 class="gate-title">Proteção de acesso</h2>
-      <p class="gate-sub">Digite a senha para entrar no <strong>SADEFT LEAL</strong>.</p>
-      <label class="gate-label" for="senha">Senha</label>
+      <p class="gate-sub">Digite a senha para entrar no SADEFT LEAL.</p>
       <input class="gate-input" id="senha" type="password" placeholder="Digite a senha" />
       <div class="gate-actions">
         <button class="btn btn-ouro" id="entrarBtn">Entrar</button>
@@ -25,23 +86,18 @@
   <!-- Painel principal -->
   <div class="painel" id="conteudo" aria-hidden="true">
     <h1 class="titulo">Painel de Comando SADEFT LEAL</h1>
-
     <textarea id="entrada" placeholder="Digite o concurso anterior (15 dezenas)"></textarea>
     <textarea id="historico" placeholder="Digite a janela histórica (um concurso por linha)"></textarea>
-
     <button onclick="gerar()">GERAR JOGOS</button>
     <pre id="resultado">Aguardando geração...</pre>
-
     <div class="botoes-animacao">
       <button onclick="aviao()">✈️ Jato Branco</button>
       <button onclick="carro()">🏎️ Mercedes AMG</button>
       <button onclick="heli()">🚁 Helicóptero de Ouro</button>
     </div>
-
     <canvas id="canvasAnim"></canvas>
-
     <div class="versiculo-base">
-      "Conhecereis a verdade, e a verdade vos libertará" – João 8:32
+      “Conhecereis a verdade, e a verdade vos libertará” – João 8:32
     </div>
   </div>
 
