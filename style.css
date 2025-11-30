@@ -1,80 +1,96 @@
-:root{
-  --bg:#0b0f1a;
-  --panel:#0f1720;
-  --celeste:#64d2ff;
-  --gold:#d4af37;
-  --muted:#bfc8d6;
-  --glass: rgba(255,255,255,0.03);
+body {
+    background: #0c0c0c;
+    color: #d4af37;
+    font-family: "Arial Black", sans-serif;
+    text-align: center;
 }
 
-/* reset */
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter, "Segoe UI", Arial, sans-serif;background:linear-gradient(180deg,var(--bg),#05060a);color:var(--muted);-webkit-font-smoothing:antialiased;}
+.titulo {
+    margin-top: 40px;
+    font-size: 28px;
+    color: gold;
+}
 
-/* lock screen */
-.lock-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(2,6,15,0.9), rgba(2,6,15,0.96));z-index:60}
-.lock-card{width:90%;max-width:520px;padding:34px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(2,6,15,0.8);text-align:center;border:1px solid rgba(212,175,55,0.06)}
-.lock-title{font-size:34px;margin:0;color:var(--gold);letter-spacing:1px}
-.lock-sub{display:block;font-size:20px;color:#fff;margin-top:6px}
-.lock-card .verso{color:var(--celeste);margin:12px 0 18px}
-.lock-card input{width:80%;padding:14px;border-radius:12px;border:none;background:#08121a;color:#fff;font-size:16px}
-.lock-card button{margin-top:14px;padding:12px 32px;border-radius:10px;border:none;background:var(--gold);color:#000;font-weight:700;cursor:pointer}
-.lock-card .small{font-size:13px;margin-top:12px;color:rgba(212,175,55,0.85)}
-.erro{color:#ff7b7b;margin-top:8px}
+#login-screen input {
+    padding: 12px;
+    width: 80%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
 
-/* app layout */
-.app{min-height:100vh;display:flex;flex-direction:column}
-.header{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,0.02);background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005))}
-.app-title{margin:0;font-size:20px;color:#fff}
-.gold{color:var(--gold);text-shadow:0 0 14px rgba(212,175,55,0.08)}
-.subtext{color:var(--celeste);font-size:13px;margin-top:6px}
+#login-screen button {
+    background: gold;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: black;
+}
 
-.header-right .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
+.painel-titulo {
+    font-size: 24px;
+    margin-top: 10px;
+    color: gold;
+}
 
-/* main */
-.main{display:flex;gap:18px;padding:18px;flex:1;flex-direction:column;align-items:center}
-.panel{width:95%;max-width:1100px;background:var(--panel);padding:18px;border-radius:14px;border:1px solid rgba(100,210,255,0.03);box-shadow:0 8px 40px rgba(0,0,0,0.6)}
-.panel-row{display:flex;gap:12px;margin-bottom:10px}
-.panel-row .col{flex:1}
-.panel label{display:block;color:var(--gold);font-weight:600;margin-bottom:6px}
-input[type="text"], input[type="password"], textarea, input{width:100%;padding:12px;border-radius:10px;border:none;background:#08121a;color:#fff}
-textarea{min-height:90px;resize:vertical}
+.btn-sair {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: crimson;
+    padding: 12px;
+    color: white;
+    border-radius: 10px;
+}
 
-/* buttons */
-.controls-row{display:flex;justify-content:space-between;align-items:center;margin:12px 0;gap:12px}
-.controls-row .selects{display:flex;gap:10px;align-items:center}
-.btn-white{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
-.btn-primary{background:var(--celeste);border:none;padding:9px 14px;border-radius:10px;color:#011;cursor:pointer;font-weight:700}
-.btn-gold{background:linear-gradient(90deg,var(--gold),#ffd965);border:none;padding:10px 16px;border-radius:12px;color:#000;font-weight:800;cursor:pointer;box-shadow:0 8px 30px rgba(212,175,55,0.12)}
+.numeros-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 25px;
+}
 
-/* grid dezenas */
-.dezenas-wrap{margin-top:12px}
-.dezenas-title{color:var(--muted);margin-bottom:8px;font-weight:600}
-.grid-dezenas{display:grid;grid-template-columns:repeat(5,64px);gap:10px;justify-content:center}
-.dez{width:64px;height:48px;border-radius:8px;background:linear-gradient(180deg,#0b1620,#091018);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04);color:#cfd8e3;cursor:pointer;box-shadow:0 6px 12px rgba(0,0,0,0.5);font-weight:700;user-select:none}
-.dez.selected{background:linear-gradient(180deg,#2bb673,#1b8b4f);color:#001;transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,0.45)}
-.dez.fixed{background:linear-gradient(180deg,var(--gold),#c79f3b);color:#101010;box-shadow:0 6px 20px rgba(212,175,55,0.18);transform:translateY(-6px)}
-.selecionadas{margin-top:10px;color:var(--muted);}
+.numero {
+    padding: 18px;
+    background: #1a1a1a;
+    border: 2px solid gold;
+    border-radius: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #000;
+}
 
-/* insights & trends */
-.info-row{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-.insight{flex:1;min-width:260px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-.tendencias{color:#fff}
+.numero.verde {
+    background: #0f660f;
+    border-color: lime;
+}
 
-/* resultado */
-.result{width:95%;max-width:1100px;margin-top:18px}
-.resultado{background:var(--glass);padding:12px;border-radius:12px;color:#fff;min-height:120px;border:1px solid rgba(255,255,255,0.02)}
-.jogo-box{display:flex;align-items:center;gap:12px;padding:8px;border-radius:8px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03))}
-.jogo-num{display:flex;gap:6px;flex-wrap:wrap}
-.badge{display:inline-block;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.03);color:#fff;font-weight:700}
+.numero.dourado {
+    background: #4a3b00;
+    border-color: gold;
+}
 
-/* footer */
-.footer{padding:16px;text-align:center;color:var(--celeste);opacity:0.9}
+.btn {
+    background: #005f99;
+    color: white;
+    padding: 14px 25px;
+    font-size: 18px;
+    border-radius: 10px;
+    margin: 10px;
+}
 
-/* responsive */
-@media (max-width:720px){
-  .grid-dezenas{grid-template-columns:repeat(5,56px)}
-  .dez{width:56px;height:46px}
-  .panel-row{flex-direction:column}
-  .controls-row{flex-direction:column;align-items:flex-start}
+.resultado {
+    margin-top: 20px;
+    background: #111;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+#chat-box {
+    height: 200px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #111;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
