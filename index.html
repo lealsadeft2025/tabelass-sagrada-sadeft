@@ -1,50 +1,129 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tabela Sagrada SADEFT LEAL</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tabela Sagrada — SADEFT LEAL</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- LOCK SCREEN -->
+  <div id="lock" class="lock-screen">
+    <div class="lock-card">
+      <h1 class="lock-title">Tabela Sagrada<br/><span class="lock-sub">SADEFT LEAL</span></h1>
+      <p class="verso">Orarás a Ele e Ele te ouvirá</p>
+      <input id="senha" type="password" placeholder="Digite a senha" autocomplete="off" />
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;">
+        <button id="btnEntrar" class="btn-gold">Entrar</button>
+        <button id="btnHelp" class="btn-white" title="Ajuda">Ajuda</button>
+      </div>
+      <p class="verso small">"Conhecereis a verdade e a verdade vos libertará" — João 8:32</p>
+      <p class="erro" id="errLock"></p>
+    </div>
+  </div>
 
-<div id="login-screen">
-    <h1 class="titulo">🔐 Tabela Sagrada SADEFT LEAL</h1>
-    <input type="password" id="senha" placeholder="Digite a senha">
-    <button onclick="validarSenha()">Entrar</button>
-</div>
-
-<div id="app-screen" style="display:none;">
-    <header>
-        <h1 class="painel-titulo">Painel de Comando — Tabela Sagrada SADEFT LEAL</h1>
-        <p class="frase-topo">Orarás a Ele e Ele te ouvirá</p>
-        <p class="frase-baixo">E conhecereis a verdade, e a verdade vos libertará — Gratidão</p>
-        <button class="btn-sair" onclick="sair()">Sair</button>
+  <!-- APP -->
+  <div id="app" class="app" style="display:none">
+    <header class="header">
+      <div class="header-left">
+        <h2 class="app-title">Tabela Sagrada <span class="gold">SADEFT LEAL</span></h2>
+        <div class="subtext">Orarás a Ele e Ele te ouvirá</div>
+      </div>
+      <div class="header-right">
+        <button id="btnSair" class="btn-ghost">Sair</button>
+      </div>
     </header>
 
-    <section class="numeros-container" id="numeros-container">
-        <!-- Números de 1 a 25 gerados via JS -->
-    </section>
+    <main class="main">
+      <section class="panel">
+        <div class="panel-row">
+          <div class="col">
+            <label>Concurso anterior (15 dezenas)</label>
+            <input id="concursoAnterior" placeholder="ex: 01 02 03 04 ..." />
+          </div>
+          <div class="col">
+            <label>Resultado oficial (opcional p/ conferir)</label>
+            <input id="resultadoOficial" placeholder="ex: 01 02 03 04 ..." />
+          </div>
+        </div>
 
-    <section class="acoes">
-        <button class="btn" onclick="limparSelecao()">Limpar</button>
-        <button class="btn" onclick="gerarJogos()">Gerar Jogos</button>
-        <button class="btn" onclick="analisarHistorico()">Analisar Últimos 50</button>
-    </section>
+        <label>Janela histórica (cada linha um concurso — até 50 linhas)</label>
+        <textarea id="historico" placeholder="Ex: cada linha = um concurso:&#10;01 02 03 04 05 06 07 08 09 10 11 12 13 14 15"></textarea>
 
-    <section class="resultado">
-        <h2>Resultados</h2>
-        <pre id="resultado-box"></pre>
-    </section>
+        <div class="controls-row">
+          <div>
+            <button id="btnLimpar" class="btn-white">Limpar</button>
+            <button id="btnIncluir" class="btn-primary">Incluir fixa</button>
+            <button id="btnGerar" class="btn-gold">Gerar</button>
+          </div>
+          <div class="selects">
+            <label>Quantidade:</label>
+            <select id="quantidade">
+              <option value="1">1 jogo</option>
+              <option value="3" selected>3 jogos</option>
+              <option value="5">5 jogos</option>
+              <option value="10">10 jogos</option>
+              <option value="100">100 jogos</option>
+              <option value="400">400 jogos</option>
+            </select>
+            <label>Tamanho (por bilhete):</label>
+            <select id="tamanho">
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12" selected>12</option>
+              <option value="13">13</option>
+            </select>
+          </div>
+        </div>
 
-    <section class="ia-voz">
-        <h2>Assistente SADEFT IA</h2>
-        <div id="chat-box"></div>
-        <input id="chat-input" placeholder="Fale com a IA...">
-        <button onclick="enviarMensagemIA()">Enviar</button>
-    </section>
-</div>
+        <div class="dezenas-wrap">
+          <div class="dezenas-title">Dezenas (clique: selecionar — verde; duplo-clique: fixa — dourado)</div>
+          <div id="gridDezenas" class="grid-dezenas" aria-label="Grade de dezenas"></div>
+          <div class="selecionadas">Selecionadas: <span id="selecionadasList">nenhuma</span></div>
+        </div>
 
-<script src="script.js"></script>
+        <div class="info-row">
+          <div class="insight">
+            <h3>Tendências (últimos <span id="lenHist">0</span> concursos)</h3>
+            <div id="tendencias" class="tendencias">—</div>
+          </div>
+          <div class="insight">
+            <h3>Previsões & Probabilidades</h3>
+            <div id="probabilidades">Gere para ver</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="result">
+        <h3>Jogos gerados</h3>
+        <div id="resultado" class="resultado">Nenhum jogo gerado</div>
+      </section>
+
+      <!-- CHAT / VOZ -->
+      <section class="chat-panel">
+        <h3>Assistente SADEFT (converse e ouça)</h3>
+        <div id="chatLog" class="chat-log" aria-live="polite"></div>
+        <div class="chat-controls">
+          <input id="chatInput" placeholder="Escreva sua pergunta..." />
+          <button id="chatSend" class="btn-gold">Enviar</button>
+          <button id="chatSpeak" class="btn-primary">Reproduzir última</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>Gratidão • Orarás a Ele e Ele te ouvirá • Tabela Sagrada SADEFT LEAL</div>
+    </footer>
+  </div>
+
+  <!-- scripts -->
+  <script>
+    /* small accessibility fallback when files missing */
+    (function(){
+      if(!window.CSS){ console.warn("CSS support ok"); }
+    })();
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>
