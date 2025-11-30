@@ -30,6 +30,10 @@
         <div class="subtext">Orarás a Ele e Ele te ouvirá</div>
       </div>
       <div class="header-right">
+        <div class="menu-buttons">
+          <!-- MENU Dinar Kuwait (د.ك) -->
+          <button id="btnMenu" class="btn-menu"><span class="sym">د.ك</span><span class="label">Menu</span></button>
+        </div>
         <button id="btnSair" class="btn-ghost">Sair</button>
       </div>
     </header>
@@ -47,15 +51,16 @@
           </div>
         </div>
 
-        <label>Janela histórica (cada linha um concurso — até 50 linhas)</label>
-        <textarea id="historico" placeholder="Ex: cada linha = um concurso:&#10;01 02 03 04 05 06 07 08 09 10 11 12 13 14 15"></textarea>
+        <label>Janela histórica (últimos 20 concursos — automático)</label>
+        <textarea id="historico" placeholder="Ex: uma linha = um concurso. Será mantida automaticamente"></textarea>
 
         <div class="controls-row">
           <div>
             <button id="btnLimpar" class="btn-white">Limpar</button>
-            <button id="btnIncluir" class="btn-primary">Incluir fixa</button>
+            <button id="btnIncluir" class="btn-primary">Incluir fixa <span class="cur-sym">د.ب</span></button>
             <button id="btnGerar" class="btn-gold">Gerar</button>
           </div>
+
           <div class="selects">
             <label>Quantidade:</label>
             <select id="quantidade">
@@ -63,9 +68,10 @@
               <option value="3" selected>3 jogos</option>
               <option value="5">5 jogos</option>
               <option value="10">10 jogos</option>
-              <option value="100">100 jogos</option>
-              <option value="400">400 jogos</option>
+              <option value="15">15 jogos</option>
+              <option value="20">20 jogos</option>
             </select>
+
             <label>Tamanho (por bilhete):</label>
             <select id="tamanho">
               <option value="10">10</option>
@@ -84,9 +90,15 @@
 
         <div class="info-row">
           <div class="insight">
-            <h3>Tendências (últimos <span id="lenHist">0</span> concursos)</h3>
+            <h3>Tendências</h3>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+              <button id="btnLast3" class="tiny">Últimos 3</button>
+              <button id="btnLast10" class="tiny">Últimos 10</button>
+              <div style="flex:1;text-align:right;color:var(--muted)">Histórico: <span id="lenHist">0</span></div>
+            </div>
             <div id="tendencias" class="tendencias">—</div>
           </div>
+
           <div class="insight">
             <h3>Previsões & Probabilidades</h3>
             <div id="probabilidades">Gere para ver</div>
@@ -106,8 +118,8 @@
         <div id="chatLog" class="chat-log" aria-live="polite"></div>
         <div class="chat-controls">
           <input id="chatInput" placeholder="Escreva sua pergunta..." />
-          <button id="chatSend" class="btn-gold">Enviar</button>
-          <button id="chatSpeak" class="btn-primary">Reproduzir última</button>
+          <button id="chatSend" class="btn-gold">Enviar <span class="cur-sym">£</span></button>
+          <button id="chatSpeak" class="btn-primary">Ouvir última</button>
         </div>
       </section>
     </main>
@@ -117,13 +129,6 @@
     </footer>
   </div>
 
-  <!-- scripts -->
-  <script>
-    /* small accessibility fallback when files missing */
-    (function(){
-      if(!window.CSS){ console.warn("CSS support ok"); }
-    })();
-  </script>
   <script src="script.js"></script>
 </body>
 </html>
