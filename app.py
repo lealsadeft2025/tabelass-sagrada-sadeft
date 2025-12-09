@@ -109,6 +109,17 @@ def prever():
 @app.route('/api/health')
 def health():
     return jsonify({'ok': True, 'engine': 'python-sadeft', 'version': 'v3-light'})
-
+@app.route('/api/concurso-atual')
+def concurso_atual():
+    try:
+        url = "https://loteriascaixa-api.herokuapp.com/api/lotofacil/latest"
+        resp = requests.get(url).json()
+        return jsonify({
+            "concurso": resp.get("concurso"),
+            "dezenas": resp.get("dezenas"),
+            "data": resp.get("data")
+        })
+    except Exception as e:
+        return jsonify({"erro": "Falha ao buscar concurso", "detalhes": str(e)})
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
