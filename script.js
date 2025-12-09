@@ -190,3 +190,47 @@ $("btnAtualizar").addEventListener("click", ()=>{
   carregarConcurso();
   alert("Dados atualizados com sucesso!");
 });
+// Função para buscar concurso atual e atualizar campos
+async function carregarConcurso() {
+  try {
+    const resp = await fetch("/api/concurso-atual");
+    const dados = await resp.json();
+
+    // Preenche campo Concurso Anterior
+    const campo = $("concursoAnterior");
+    if (campo && dados.dezenas) {
+      campo.value = dados.dezenas.join(" ");
+    }
+
+    // Atualiza histórico
+    const arrHist = loadHistorico();
+    if (dados.dezenas && dados.dezenas.length >= 5) {
+      const dezenasNum = dados.dezenas.map(x => parseInt(x, 10));
+      if (!(arrHist.length && arraysEqual(arrHist[arrHist.length-1], dezenasNum))) {
+        arrHist.push(dezenasNum);
+        saveHistorico(arrHist);
+        ensureHistoricoTextarea();
+      }
+    }
+
+    // Atualiza tendências
+    updateTendencias(3);
+
+  } catch (e) {
+    console.error("Erro ao carregar concurso:", e);
+  }
+}
+
+// Botão de atualizar
+$("btnAtualizar").addEventListener("click", ()=>{
+  carregarConcurso();
+  alert("Dados atualizados com sucesso!");
+});
+
+// initApp já existente — só garantir que chama carregarConcurso
+function initApp(){ 
+  buildGrid(); 
+  ensureHistoricoTextarea(); 
+  updateTendencias(3); 
+  carregarConcurso(); // carrega ao entrar
+}
