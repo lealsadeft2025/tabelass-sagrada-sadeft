@@ -343,3 +343,28 @@ function tocarOrionSADEFT() {
   osc1.stop(ctx.currentTime + 1.2);
   osc2.stop(ctx.currentTime + 1.2);
     }
+// 🪙 SOM OPENER — MOEDA DOURADA (SEM MP3)
+function tocarOpenerMoedaSADEFT() {
+  if (!window.SADEFT_audioCtx) {
+    window.SADEFT_audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  const ctx = window.SADEFT_audioCtx;
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = "triangle";
+  osc.frequency.setValueAtTime(1200, ctx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.35);
+
+  gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.6, ctx.currentTime + 0.05);
+  gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start();
+  osc.stop(ctx.currentTime + 0.4);
+                                }
