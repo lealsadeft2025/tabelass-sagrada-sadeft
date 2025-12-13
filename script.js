@@ -343,3 +343,5 @@ function tocarOrionSADEFT() {
   osc1.stop(ctx.currentTime + 1.2);
   osc2.stop(ctx.currentTime + 1.2);
     }
+<script src="script.js"></script>
+</body>
