@@ -46,3 +46,15 @@ Projeto completo (frontend + backend híbrido Node + Python) para o painel "Tabe
   - Integrar modelos ML reais e treinar com seus dados
   - Gerar APK (WebView) para Android
   - Fazer deploy passo a passo no Render
+# 🔮 SADEFT LEAL V3.2 – Fase 3
+
+Motor inteligente para geração de dezenas (Lotofácil)
+com núcleo fixo + IA leve por atraso.
+
+## 🚀 Endpoints
+- `/` Interface web
+- `/api/health` Status
+- `/api/gerar` Gerar jogo inteligente
+
+## ☁️ Deploy
+Render (Python + Gunicorn)
