@@ -368,3 +368,20 @@ function tocarOpenerMoedaSADEFT() {
   osc.start();
   osc.stop(ctx.currentTime + 0.4);
                                 }
+async function gerar() {
+  const res = await fetch("/api/gerar");
+  const data = await res.json();
+
+  let texto =
+    "🧠 " + data.motor +
+    "\n🔢 Núcleo: " + data.nucleo.join(" - ") +
+    "\n\n🎯 JOGO GERADO:\n" +
+    data.jogo.join(" - ") +
+    "\n\n📜 HISTÓRICO:\n";
+
+  data.historico.forEach((j, i) => {
+    texto += (i + 1) + ": " + j.join(" - ") + "\n";
+  });
+
+  document.getElementById("saida").innerText = texto;
+    }
