@@ -123,3 +123,31 @@ def concurso_atual():
         return jsonify({"erro": "Falha ao buscar concurso", "detalhes": str(e)})
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+from flask import Flask, jsonify, request
+import datetime
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "SADEFT LEAL V3 SUPER MOTOR — ONLINE"
+
+@app.route("/api/saude")
+def saude():
+    return jsonify({
+        "status": "ok",
+        "motor": "SADEFT LEAL V3 SUPER",
+        "hora": datetime.datetime.utcnow().isoformat()
+    })
+
+@app.route("/api/prever", methods=["POST"])
+def prever():
+    dados = request.json or {}
+    return jsonify({
+        "entrada": dados,
+        "resultado": "Tabela Sagrada processada",
+        "acertos_estimados": 11
+    })
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
