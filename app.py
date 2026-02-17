@@ -64,3 +64,30 @@ def gerar():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+    
+# ===============================
+# SIMULAÇÃO DE ATRASOS (ESTATÍSTICA)
+# ===============================
+
+def gerar_atrasos_simulados():
+    universo = list(range(1, 26))
+    atrasos = {}
+
+    for n in universo:
+        atrasos[n] = random.randint(0, 6)
+
+    return atrasos
+
+@app.route("/api/atrasados")
+def atrasados():
+    atrasos = gerar_atrasos_simulados()
+
+    # Seleciona os mais atrasados
+    ordenados = sorted(atrasos.items(), key=lambda x: x[1], reverse=True)
+
+    top_atrasados = ordenados[:10]
+
+    return jsonify({
+        "atrasos": top_atrasados,
+        "observacao": "Projeção estatística baseada em atraso relativo, não previsão exata."
+    })
